@@ -13,7 +13,7 @@ This is a port of the [Pisces graphics library](https://code.google.com/p/pisces
 
 ##Installation
 
-1. Copy the CN1Pisces.cn1lib file into your project's lib directory.
+1. Copy the [CN1Pisces.cn1lib](https://github.com/shannah/CN1Pisces/raw/master/dist/CN1Pisces.cn1lib) file into your project's lib directory.
 2. Refresh libs in your project.  In Netbeans this can be done by right-clicking the project icon in the project explorer, and selecting "Refresh Libs"
 
 ##Basic Usage Example
@@ -81,6 +81,20 @@ import pisces.Graphics;
 The following example is from the original Pisces GAE port repository.  There are minor differences between this example and one that will work in Codename One.  For example, you would probably want to use the Graphics.toImage() method to obtain an image than the Graphics.toPNG() method (which is used in this example) because there is no need to waste cycles compressing the image when you are just displaying it to the screen.
 
 [Example Source Code](https://code.google.com/p/cpi/source/browse/trunk/server/src/cpi/ProfileImage.java)
+
+##Other Examples
+
+[Tests Directory for Pisces Graphics (Not CN1 Port)](https://code.google.com/p/pisces-graphics/source/browse/trunk/test/src/)
+
+##JavaDocs
+
+[Index Page](https://rawgithub.com/shannah/CN1Pisces/master/dist/javadoc/index.html)
+
+###Key Classes
+
+1. [Graphics](https://rawgithub.com/shannah/CN1Pisces/master/dist/javadoc/pisces/Graphics.html)
+2. [Path](https://rawgithub.com/shannah/CN1Pisces/master/dist/javadoc/pisces/Path.html)
+3. [Surface](https://rawgithub.com/shannah/CN1Pisces/master/dist/javadoc/pisces/Path.html)
 
 ##Todo
 
