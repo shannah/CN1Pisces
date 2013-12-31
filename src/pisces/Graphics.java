@@ -114,6 +114,25 @@ public class Graphics
         }
         this.font = null;
     }
+    /**
+     * Sets the current stroke parameters.
+     *
+     * @param lineWidth the sroke width
+     * @param capStyle the line cap style, one of
+     * <code>Stroker.CAP_*</code>.
+     * @param joinStyle the line cap style, one of
+     * <code>Stroker.JOIN_*</code>.
+     * @param miterLimit the stroke miter limit
+     * @param dashArray an <code>int</code> array containing the dash
+     * segment lengths in S15.16 format, or <code>null</code>.
+     * @param dashPhase the starting dash offset, in S15.16 format.
+     * @return Self for chaining.
+     */
+    public final Graphics setStroke(double lineWidth, int capStyle, int joinStyle, double miterLimit, double[] dashArray, double dashPhase){
+        this.renderer.setStroke(lineWidth, capStyle, joinStyle, miterLimit, dashArray, dashPhase);
+        return this;
+    }
+    
     public final Graphics setAntialiasing(boolean antialiasingOn) {
         this.renderer.setAntialiasing(antialiasingOn);
         return this;
