@@ -2,6 +2,10 @@
 
 This is a port of the [Pisces graphics library](https://code.google.com/p/pisces-graphics/) for use with [Codename One](http://www.codenameone.com) applications.  It provides a 2D drawing canvas that can be used for drawing arbitrary shapes and paths in Codename One.
 
+##License
+
+GPL with CLASSPATH exception
+
 ##Features
 
 1. Draw shapes (ovals, rectangles, lines, polygons, and arbitrary paths).
@@ -22,58 +26,48 @@ This example creates a simple form that, when pressed, draws a red oval the widt
 
 ~~~
 
-import pisces.Color;
-import pisces.Graphics;
-
-…
-	public void start() {
-        try {
-            if(current != null){
-                current.show();
-                return;                
-            }
-            Image img  = testPisces(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
-            final Label l = new Label(img);
-            Form hi = new Form("Hi World"){
-
-                
-                
-                @Override
-                public void pointerPressed(int x, int y) {
-                    try {
-                        Image img = testPisces(x, y);
-                        l.setIcon(img);
-                    } catch (IOException ex) {
-                        Log.e(ex);
-                    }
-                    
-                }
-                
-            };
-            hi.addComponent(new Label("Hi World"));
-            hi.addComponent(l);
-            hi.show();
-        } catch (IOException ex) {
-            Log.e(ex);
+	public void startPisces() {
+       
+        if(current != null){
+            current.show();
+            return;                
         }
-    }
+        Image img  = drawCircle(Display.getInstance().getDisplayWidth(), Display.getInstance().getDisplayHeight());
+        final Label l = new Label(img);
+        Form hi = new Form("Hi World"){
 
-	Image drawCircle(int width, int height){
-		Image out = null;
-	    try {
-			Graphics g = new Graphics(width,height);
-	        g.setColor(Color.Red);
-	        g.setAntialiasing(true);
-	        
-	        g.drawOval(0, 0, width, height);
 
-	        out = g.toImage();
-	    } finally {
-	    	g.dispose();
-	    }
-	    return out;
+
+            @Override
+            public void pointerPressed(int x, int y) {
+                Image img = drawCircle(x, y);
+                l.setIcon(img);
+
+            }
+
+        };
+        hi.addComponent(new Label("Hi World"));
+        hi.addComponent(l);
+        hi.show();
+        
     }
- 
+    
+    Image drawCircle(int width, int height){
+        Image out = null;
+        pisces.Graphics g = new pisces.Graphics(width,height);
+        try {
+            
+            g.setColor(pisces.Color.Red);
+            g.setAntialiasing(true);
+
+            g.drawOval(0, 0, width, height);
+
+            out = g.toImage();
+        } finally {
+            g.dispose();
+        }
+        return out;
+    } 
 ~~~
 
 ##Advanced Usage Example
