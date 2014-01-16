@@ -80,6 +80,10 @@ The following example is from the original Pisces GAE port repository.  There ar
 
 [Tests Directory for Pisces Graphics (Not CN1 Port)](https://code.google.com/p/pisces-graphics/source/browse/trunk/test/src/)
 
+##Fonts
+
+Pisces has a flexible API that allows you to easily add your own fonts.  Check out the [CN1FontBox](https://github.com/shannah/CN1FontBox) project for TTF font support.
+
 ##JavaDocs
 
 [Index Page](https://rawgithub.com/shannah/CN1Pisces/master/dist/javadoc/index.html)
@@ -94,5 +98,4 @@ The following example is from the original Pisces GAE port repository.  There ar
 
 Codename One will be including a 2D drawing API in a future version (scheduled in the first part of 2014) so I'm not sure it is worth putting much more work into this library.  Some nice features that could probably be added without a tremendous amout of work:
 
-1. Font (drawString) support.
-2. Better integration with the Codename One class library.  E.g. Possibly creating a wrapper class that extends the Codename One Graphics class but includes support for more 2D drawing primitives.
+1. Better integration with the Codename One class library.  E.g. Possibly creating a wrapper class that extends the Codename One Graphics class but includes support for more 2D drawing primitives.
