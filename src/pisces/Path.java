@@ -23,6 +23,10 @@
  */
 package pisces;
 
+import java.util.ArrayList;
+import java.util.List;
+import pisces.m.Matrix;
+
 /**
  * @see pisces.d.LineSink
  * @see pisces.d.PathSink
@@ -32,8 +36,9 @@ public class Path
     extends pisces.d.PathStore
 {
 
+    
     public final int windingRule;
-
+    
 
     public Path(){
         this(WIND_NON_ZERO);
@@ -42,4 +47,6 @@ public class Path
         super();
         this.windingRule = windingRule;
     }
+    
+    
 }

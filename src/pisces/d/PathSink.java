@@ -23,6 +23,8 @@
  */
 package pisces.d;
 
+import pisces.m.Matrix;
+
 /**
  * The <code>LineSink</code> interface extends the
  * <code>PathSink</code> interface, and additionally accepts curve
@@ -30,6 +32,8 @@ package pisces.d;
  */
 public abstract class PathSink extends LineSink {
 
+    
+    
     /**
      * Draws a quadratic Bezier curve starting at the current drawing
      * position and ending at the point <code>(x2, y2)</code>
@@ -81,4 +85,7 @@ public abstract class PathSink extends LineSink {
     public PathSink clone(){
         return (PathSink)super.clone();
     }
+    
+    
+    
 }

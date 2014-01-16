@@ -23,6 +23,8 @@
  */
 package pisces.d;
 
+import com.codename1.io.Log;
+
 /**
  * The <code>Flattener</code> class rewrites a general path, which
  * may include curved segments, into one containing only linear
@@ -146,6 +148,8 @@ public class Flattener extends PathSink {
     }
     private void quadToHelper(double x1, double y1, double x2, double y2)
     {
+        //System.out.println("QuadToHelper "+x1+" "+y1+" "+x2+" "+y2);
+        
         if (flatEnough(x0, y0, x1, y1, x2, y2)) {
             output.lineTo(x1, y1);
             output.lineTo(x2, y2);

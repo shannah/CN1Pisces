@@ -32,7 +32,7 @@ import java.lang.Math;
  * floating point x,y,z coordinates.
  *
  */
-public abstract class Tuple
+public class Tuple
     extends pisces.d.FPMath
     implements Cloneable
 {

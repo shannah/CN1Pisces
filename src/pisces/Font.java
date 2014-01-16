@@ -23,12 +23,14 @@
  */
 package pisces;
 
-import com.codename1.system.NativeLookup;
+
+import com.codename1.io.Log;
 import com.codename1.ui.Display;
-import pisces.f.NativeFontLoader;
-import java.io.ByteArrayInputStream;
+
 import java.io.InputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 //import java.net.URL;
 
 /**
@@ -44,12 +46,70 @@ public class Font
     extends Object
     implements Iterable<Font.Glyph>
 {
+    
+    private static List<FontProvider> providers = new ArrayList<FontProvider>();
+    
+    /**
+     * Adds a font provider that can be used to load fonts.
+     * @param provider 
+     */
+    public static void addProvider(FontProvider provider){
+        providers.add(provider);
+    }
+    
+    /**
+     * Removes a font provider.
+     * @param provider 
+     */
+    public static void removeProvider(FontProvider provider){
+        providers.remove(provider);
+    }
+    
+    /**
+     * Gets a font with the specified name and size.
+     * @param name The name of the font to load.
+     * @param size The size (in pixels).
+     * @return The font or null if it could not be found.
+     */
+    public static Font getFont(String name, float size){
+        Font out = null;
+        for ( FontProvider provider: providers){
+            out = provider.getFont(name, size);
+            if ( out != null ){
+                out.provider = provider;
+                return out;
+            }
+        }
+        try {
+            out = new Font(name);
+        } catch ( IOException ioe){
+            Log.e(ioe);
+        }
+        return out;
+    }
+    
     /**
      * Vector or Bitmap
      */
     public enum Kind {
 
         Draw, Blit
+    }
+    
+    
+    /**
+     * Interface that can be implemented by any class that wishes to provide
+     * fonts to Pisces.  
+     */
+    public static interface FontProvider {
+        
+        /**
+         * Returns the specified font in the given size.
+         * @param name The name of the font.
+         * @param size The size of the font (in pixels);
+         * @return 
+         */
+        public Font getFont(String name, float size);
     }
 
     /**
@@ -149,6 +209,7 @@ public class Font
         {
             Font.Type type = Type.Of(name);
             Font.Glyph.Collection collection = type.newInstance();
+            /*
             NativeFontLoader loader = (NativeFontLoader)NativeLookup.create(NativeFontLoader.class);
             if ( loader.isSupported() ){
                 byte[] data = loader.getFontData(name);
@@ -161,10 +222,10 @@ public class Font
                 return collection;
                 
             }
-            
+            */
             /*
              */
-            String url = null;
+            String url = "/"+name;
             //if ('/' == name.charAt(0))
             //    url = Font.class.getResource(name);
             //else
@@ -188,9 +249,15 @@ public class Font
 
 
     private String name;
+    private FontProvider provider;
 
     private Font.Glyph.Collection collection;
 
+    
+    public Font(String name, Font.Glyph.Collection collection){
+        this.name = name;
+        this.collection = collection;
+    }
 
     /**
      * @param name Font file name, for example "sun12x22.psfu".
@@ -208,6 +275,13 @@ public class Font
     }
 
 
+    public Font deriveFont(float size){
+        if ( provider != null ){
+            return provider.getFont(name, size);
+        }
+        return null;
+    }
+    
     public Kind getKind(){
         return this.collection.getKind();
     }
@@ -294,7 +368,6 @@ public class Font
 
                         if (null != glyph){
                             glyph.draw(g,px,py,op);
-
                             px += glyph.getWidth();
                         }
                         else

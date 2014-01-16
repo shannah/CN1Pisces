@@ -25,6 +25,7 @@
 
 package pisces.m;
 
+import com.codename1.util.MathUtil;
 import java.lang.Math;
 
 /**
@@ -35,7 +36,54 @@ public class Matrix
     implements Cloneable
 {
 
-
+    
+    public static final Matrix getRotateInstance(double theta){
+        return new Matrix(
+                Math.cos(theta), -Math.sin(theta), 0,
+                Math.sin(theta), Math.cos(theta), 0,
+                0,0,1
+        );
+    }
+    
+    public static final Matrix getRotateInstance(double theta, double anchorx, double anchory){
+        return new Matrix(
+            Math.cos(theta), -Math.sin(theta), anchorx-anchorx*Math.cos(theta)+anchory*Math.sin(theta),
+            Math.sin(theta), Math.cos(theta), anchory-anchorx*Math.sin(theta)-anchory*Math.cos(theta),
+            0,0,1);
+    }
+    
+    public static final Matrix getRotateInstance(double vecx, double vecy){
+        return getRotateInstance(MathUtil.atan2(vecy, vecx));
+    }
+    
+    public static final Matrix getRotateInstance(double vecx, double vecy, double anchorx, double anchory){
+        return getRotateInstance(MathUtil.atan2(vecy, vecx), anchorx, anchory);
+    }
+    
+    
+    public static final Matrix getScaleInstance(double sx, double sy){
+        return new Matrix(
+            sx, 0, 0,
+            0, sy, 0,
+            0,0,1
+        );
+    }
+    
+    public static final Matrix getShearInstance(double shx, double shy){
+        return new Matrix(
+            1, shx, 0,
+            shy, 1, 0,
+            0,0,1);
+    }
+    
+    public static final Matrix getTranslateInstance(double tx, double ty){
+        return new Matrix(
+            1, 0, tx,
+            0, 1, ty,
+            0,0,1);
+    }
+    
+    
     public	double	m00;
     public	double	m01;
     public	double	m02;
@@ -2961,4 +3009,19 @@ public class Matrix
         }
     }
 
+    
+    
+    public Matrix scale(double sx, double sy){
+        Matrix m = getScaleInstance(sx, sy);
+        return this.mul(m);
+    }
+    
+    public Matrix translate(double tx, double ty){
+        Matrix m = getTranslateInstance(tx, ty);
+        this.mul(m);
+        return this;
+    }
+    
+    
+    
 }
