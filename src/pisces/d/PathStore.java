@@ -111,6 +111,38 @@ public class PathStore
         this.x0 = x1;
         this.y0 = y1;
     }
+    
+    /**
+     * Returns the number of points in this path.
+     * @return 
+     */
+    public int length(){
+        return dindex/2;
+    }
+    
+    /**
+     * Gets the coordinate of the point at the given index and stores it in the 
+     * provided double[]
+     * @param i
+     * @param point 
+     */
+    public void getPoint(int i, double[] point){
+        int idx = 2*i;
+        point[0] = pathData[idx];
+        point[1] = pathData[idx+1];
+    }
+    /**
+     * Gets the coordinate of the point at the given index and stores it in the 
+     * provided float[]
+     * @param i
+     * @param point 
+     */
+    public void getPoint(int i, float[] point){
+        int idx = 2*i;
+        point[0] = (float)pathData[idx];
+        point[1] = (float)pathData[idx+1];
+    }
+    
     public void quadTo(double x1, double y1, double x2, double y2) {
         double dx1 = x1 - x0;
         double dy1 = y1 - y0;
@@ -320,14 +352,27 @@ public class PathStore
     }
     
     
-    
     public Rectangle2D getBounds2D(){
-        double minX = 0;
-        double minY = 0;
-        double maxY = 0;
-        double maxX = 0;
+        Rectangle2D out = new Rectangle2D(0,0,0,0);
+        getBounds2D(out);
+        return out;
+    }
+    
+    
+    public void getBounds2D(Rectangle2D rect){
+        double minX = Double.MAX_VALUE;
+        double minY = Double.MAX_VALUE;
+        double maxY = Double.MIN_VALUE;
+        double maxX = Double.MIN_VALUE;
         
         int len = pathData.length;
+        if ( len == 0 ){
+            rect.x = 0;
+            rect.y = 0;
+            rect.width=0;
+            rect.height=0;
+            return;
+        }
         for ( int i=0; i<len; i+=2){
             double x1 = pathData[i];
             double y1 = pathData[i+1];
@@ -344,7 +389,11 @@ public class PathStore
                 maxY = y1;
             }
         }
-        return new Rectangle2D(minX, minY, maxX-minX, maxY-minY);
+        rect.x = minX;
+        rect.y = minY;
+        rect.width = maxX-minX;
+        rect.height = maxY-minY;
+        
         
     }
     

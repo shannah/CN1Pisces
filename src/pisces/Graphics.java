@@ -83,10 +83,17 @@ public class Graphics
 
 
     public com.codename1.ui.Image toImage(){
-        int[] rgb = new int[this.width*this.height];
-        this.surface.getRGB(rgb, 0, width, 0, 0, width, height);
-        return com.codename1.ui.Image.createImage(rgb, width, height);
+        //int[] rgb = new int[this.width*this.height];
+        //this.surface.getRGB(rgb, 0, width, 0, 0, width, height);
+        //return com.codename1.ui.Image.createImage(rgb, width, height);
+        return this.toImage(0,0, this.width, this.height);
         
+    }
+    
+    public com.codename1.ui.Image toImage(int x, int y, int w, int h){
+        int[] rgb = new int[w*h];
+        this.surface.getRGB(rgb, 0, w, x, y, w, h);
+        return com.codename1.ui.Image.createImage(rgb, w, h);
     }
     
     public final byte[] toPNG() throws IOException{
@@ -290,6 +297,9 @@ public class Graphics
     public final Graphics draw(String string, int x, int y){
         return this.draw(string,x,y,1.0f);
     }
+    
+    
+    
     /**
      * Vector font
      */

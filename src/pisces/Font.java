@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import pisces.d.PathSink;
 //import java.net.URL;
 
 /**
@@ -166,7 +167,14 @@ public class Font
          * drawing.
          */
         public Glyph draw(Graphics g, int x, int y, float op);
+        public Glyph draw(PathSink sink, int x, int y, float op);
+        
+       
     }
+    
+    
+    
+    
 
     /**
      * Map from font (file) name extension to implementation class.
@@ -277,8 +285,13 @@ public class Font
 
     public Font deriveFont(float size){
         if ( provider != null ){
-            return provider.getFont(name, size);
-        }
+            Font out = provider.getFont(name, size);
+            if ( out != null ){
+                
+                out.provider = provider;
+            }
+            return out;
+        } 
         return null;
     }
     
@@ -334,6 +347,51 @@ public class Font
         }
         return this;
     }
+    
+    public Font draw(PathSink sink, String string, int x, int y, float op){
+        if (null != string){
+            char[] cary = string.toCharArray();
+            int clen = cary.length;
+            if (0 < clen){
+                char ch;
+                int px = x;
+                int py = y;
+                Glyph glyph;
+                for (int cc = 0; cc < clen; cc++){
+                    ch = cary[cc];
+                    switch (ch){
+                    case 0x20:
+                        glyph = this.collection.getGlyph(ch);
+                        if (null != glyph)
+                            px += glyph.getWidth();
+                        else
+                            px += this.collection.getMaxWidth();
+                        break;
+                    case 0x0A:
+                        px = x;
+                        py += this.collection.getMaxHeight();
+                        break;
+                    case 0x0D:
+                        px = x;
+                        break;
+                    default:
+                        glyph = this.collection.getGlyph(ch);
+
+                        if (null != glyph){
+                            
+                            glyph.draw(sink,px,py,op);
+                            px += glyph.getWidth();
+                        }
+                        else
+                            px += this.collection.getMaxWidth();
+                        break;
+                    }
+                }
+            }
+        }
+        return this;
+    }
+    
     /**
      * Vector font
      */

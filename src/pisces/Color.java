@@ -138,5 +138,9 @@ public class Color
                 (c.green<<8)|
                 (c.blue & 0xff));
     }
+    
+    public String toString(){
+        return "{Red:"+this.red+" Green:"+this.green+" Blue:"+this.blue+" Alpha:"+this.alpha+"}";
+    }
 
 }

@@ -642,6 +642,7 @@ public class Matrix
 
         return max3(tmp_scale);
     }
+
     /**
      *  Adds a scalar to each component of this matrix.
      *  @param scalar  the scalar adder

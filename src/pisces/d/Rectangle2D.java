@@ -11,10 +11,10 @@ package pisces.d;
  * @author shannah
  */
 public class Rectangle2D {
-    private double x;
-    private double y;
-    private double width;
-    private double height;
+    public double x;
+    public double y;
+    public double width;
+    public double height;
     
     public Rectangle2D(double x, double y, double width, double height){
         this.x = x;

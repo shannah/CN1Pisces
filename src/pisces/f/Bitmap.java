@@ -28,6 +28,7 @@ import pisces.Graphics;
 
 import java.io.InputStream;
 import java.io.IOException;
+import pisces.d.PathSink;
 
 /**
  * Row ordered and padded bitmap.
@@ -225,6 +226,10 @@ public class Bitmap
 
         if (null == this.bits)
             this.bits = new byte[this.height*this.stride];
+    }
+
+    public Font.Glyph draw(PathSink sink, int x, int y, float op) {
+        throw new RuntimeException("draw() not supported in bitmaps");
     }
 
 }
