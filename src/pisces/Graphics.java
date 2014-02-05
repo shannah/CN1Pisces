@@ -23,7 +23,9 @@
  */
 package pisces;
 
+import com.codename1.ui.RGBImage;
 import java.io.IOException;
+import pisces.d.CN1ImageSurface;
 import pisces.d.NativeSurface;
 import pisces.d.Pisces;
 import pisces.d.Surface;
@@ -259,18 +261,44 @@ public class Graphics
     public final Graphics blit(Surface image){
         return this.blit(image,0,0);
     }
+    
+    public final Graphics blit(com.codename1.ui.Image image){
+        return this.blit(new CN1ImageSurface(image));
+    }
     public final Graphics blit(Surface image, int x, int y){
         return this.blit(image,x,y,1.0f);
     }
+    public final Graphics blit(com.codename1.ui.Image image, int x, int y){
+        return this.blit(new CN1ImageSurface(image), x, y);
+    }
+    
     public final Graphics blit(Surface image, int x, int y, float opacity){
         return this.blit(image,0,0,x,y,opacity);
     }
+    
+    public final Graphics blit(com.codename1.ui.Image image, int x, int y, float opacity){
+        return this.blit(new CN1ImageSurface(image), x, y, opacity);
+    }
+    
     public final Graphics blit(Surface image, int srcX, int srcY, int dstX, int dstY, float opacity){
         return this.blit(image,srcX,srcY,dstX,dstY,image.getWidth(),image.getHeight(),opacity);
     }
+    
+    public final Graphics blit(com.codename1.ui.Image image, int srcX, int srcY, int dstX, int dstY, float opacity){
+        return this.blit(new CN1ImageSurface(image), srcX, srcY, dstX, dstY, opacity);
+    }
+    
     public final Graphics blit(Surface image, int srcX, int srcY, int dstX, int dstY, int w, int h, float opacity)
     {
         this.renderer.blit(image,srcX,srcY,dstX,dstY,w,h,opacity);
+        return this;
+    }
+    
+    public final Graphics blit(final com.codename1.ui.Image image, int srcX, int srcY, int dstX, int dstY, int w, int h, float opacity){
+        
+        
+        Surface s = new CN1ImageSurface(image);
+        blit(s, srcX, srcY, dstX, dstY, w, h, opacity);
         return this;
     }
     /**
@@ -291,6 +319,9 @@ public class Graphics
         else
             throw new IllegalStateException("Missing font");
     }
+    
+    
+    
     /**
      * Vector font
      */
