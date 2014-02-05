@@ -134,6 +134,7 @@ public class Font
 
             public int getMaxHeight();
 
+            
             public void read(InputStream in) throws IOException;
         }
 
@@ -260,6 +261,24 @@ public class Font
     private FontProvider provider;
 
     private Font.Glyph.Collection collection;
+    private int ascent=0;
+    private int descent=0;
+    
+    public int getAscent(){
+        return ascent;
+    }
+    
+    public int getDescent(){
+        return descent;
+    }
+    
+    public void setAscent(int ascent){
+        this.ascent = ascent;
+    }
+    
+    public void setDescent(int descent){
+        this.descent = descent;
+    }
 
     
     public Font(String name, Font.Glyph.Collection collection){
