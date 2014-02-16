@@ -3,7 +3,7 @@ using System;
 namespace pisces.f{
 
 public class NativeFontLoaderImpl {
-    public void* getFontData(String param) {
+    public byte[] getFontData(string param) {
         return null;
     }
 
