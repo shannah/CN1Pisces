@@ -1,4 +1,4 @@
-package pisces.f;
+package ca.weblite.pisces.f;
 
 public class NativeFontLoaderImpl {
     public byte[] getFontData(String param) {
