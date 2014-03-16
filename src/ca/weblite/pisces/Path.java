@@ -24,8 +24,8 @@
 package ca.weblite.pisces;
 
 /**
- * @see pisces.d.LineSink
- * @see pisces.d.PathSink
+ * @see ca.weblite.pisces.d.LineSink
+ * @see ca.weblite.pisces.d.PathSink
  * @see Graphics
  */
 public class Path

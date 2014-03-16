@@ -29,7 +29,7 @@ package ca.weblite.pisces.d;
  * alphaData) between a sink (source) and a surface (target) for
  * subpixel blending (antialiasing).
  * 
- * @see Pisces
+ * @see ca.weblite.pisces
  * @see Blit
  */
 public final class Renderer

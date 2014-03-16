@@ -29,8 +29,8 @@ import ca.weblite.pisces.m.Matrix;
 /**
  * Floating point user interface (package driver).
  * 
- * @see pisces.Graphics
- * @see pisces.d2.Renderer
+ * @see ca.weblite.pisces.Graphics
+ * @see ca.weblite.pisces.d2.Renderer
  */
 public final class Pisces
     extends PathSink
