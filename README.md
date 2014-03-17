@@ -54,10 +54,10 @@ This example creates a simple form that, when pressed, draws a red oval the widt
     
     Image drawCircle(int width, int height){
         Image out = null;
-        pisces.Graphics g = new pisces.Graphics(width,height);
+        ca.weblite.piscesGraphics g = new ca.weblite.piscesGraphics(width,height);
         try {
             
-            g.setColor(pisces.Color.Red);
+            g.setColor(ca.weblite.piscesColor.Red);
             g.setAntialiasing(true);
 
             g.drawOval(0, 0, width, height);

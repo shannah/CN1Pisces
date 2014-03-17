@@ -1,6 +1,6 @@
 using System;
 
-namespace pisces.f{
+namespace ca.weblite.pisces.f{
 
 public class NativeFontLoaderImpl {
     public byte[] getFontData(string param) {
